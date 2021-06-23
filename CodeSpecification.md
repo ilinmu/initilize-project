@@ -15,8 +15,8 @@
 
 ```javascript
   const car = {
-    carColor: 'red',  // wrong
-    color: 'red',  // right
+    carColor: 'red',  // bad
+    color: 'red',  // googd
   }
 ```
 
@@ -30,12 +30,12 @@
 使用参数默认值方式：
 
 ```javascript
-// wrong
+// bad
 function handleConvertName(name) {
   const paramsName = name || 'John';
   // ...
 }
-// right
+// googd
 function handleConvertName(name = 'John') {
   // ...
 }
@@ -44,11 +44,11 @@ function handleConvertName(name = 'John') {
 函数参数不应多于2个，参数比较多的情况下传解构参数
 
 ```javascript
-// wrong
+// bad
 function createDialog(title, content, buttonText, cancellable) {
   // ...
 }
-// right
+// googd
 function createDialog({ title, content, buttonText, cancellable }) {
   // ...
 }
@@ -57,7 +57,7 @@ function createDialog({ title, content, buttonText, cancellable }) {
 函数职责应单一，`KISS（ Keep It Simple, Stupid）`原则，便于函数复用、可维护、提升代码可测性；
 
 ```javascript
-// wrong
+// bad
 function sendEmailToActiveClients(clients) {
   clients.forEach((client) => {
     const clientRecord = database.lookup(client);
@@ -67,7 +67,7 @@ function sendEmailToActiveClients(clients) {
   });
 }
 
-// right
+// googd
 function sendEmailToActiveClients(clients) {
   clients
     .filter(isActiveClient)
@@ -83,7 +83,7 @@ function isActiveClient(client) {
 合并重复代码，`DRY (Don't Repeat Yourself)`原则, 写代码的时候注意一下，重复代码比较多，一定要想办法做合并；
 
 ```javascript
-// wrong
+// bad
 function doSomething() {
   // ...
   if (test) {
@@ -97,7 +97,7 @@ function doSomething() {
     age: 20,
   };
 }
-// right
+// googd
 function doSomething() {
   // ...
   return {
@@ -106,7 +106,7 @@ function doSomething() {
   }
 }
 
-// wrong
+// bad
 function jumpToPage() {
   // ...
   if(id === 0){
@@ -127,7 +127,7 @@ function jumpToPage() {
   // ...
 }
 
-// right
+// good
 function jumpTOPage() {
   // ...
   let url = '';
@@ -147,3 +147,72 @@ function jumpTOPage() {
   });
 }
 ```
+
+### 样式
+
+样式书写一般有两种：一种是紧凑格式 (Compact)
+
+```css
+.test { display: block; width: 50px; }
+```
+一种是展开格式（Expanded）
+
+```css
+.test {
+  display: block;
+  width: 50px;
+}
+```
+
+统一使用展开格式书写样式。
+
+分号每个属性声明末尾都要加分号；
+
+```css
+.test {
+  width: 100%;
+  height: 100%;
+}
+```
+
+代码易读性左括号与类名之间一个空格，冒号与属性值之间一个空格。
+```css
+/* googd */
+.test {
+  width: 100%;
+}
+/* bad */
+.test{
+  width:100%;
+}
+
+逗号分隔的取值，逗号之后一个空格。
+
+```css
+/* good */
+.test {
+  box-shadow: 1px 1px 1px #333, 2px 2px 2px #ccc;
+}
+/* bad */
+.test {
+  box-shadow: 1px 1px 1px #333,2px 2px 2px #ccc;
+}
+```
+
+不要为 0 指明单位。
+
+```css
+/* good */
+.test {
+  margin: 0 10px;
+}
+/* bad */
+.test {
+  margin: 0px 10px;
+}
+
+### 媒体
+
+图片都应该经过压缩处理，压缩后的图片不应该出现肉眼可感知的失真。60 质量的 JPEG 格式图片与质量大于 60 的相比，肉眼已看不出明显的区别，因此保存 JPEG 图的时候，质量一般控制在 60，若保真度要求高的图片可适量提高到 80，图片大小控制在 200KB 以内。
+
+
