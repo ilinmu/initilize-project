@@ -5,9 +5,19 @@
 
 代码可读性要强，容易让人理解。要符合大部分人的思维。
 
+javscript 统一使用 [ES6](https://es6.ruanyifeng.com/) 语法。
+
+不要使用 `var` 声明变量。
+
+对象使用解构赋值。
+
+优先使用对象展开运算符 `...` 来做对象浅拷贝而不是使用 `Object.assign`，数组同理。
+
 ### 变量
 
 * 变量名要有意义，不要使用诸如 `a`,`b`,`c`,`obj`,`arr`这一类命名，正确命名应该是`userList`，`optionsMap` 等；
+
+* 统一使用驼峰式命名规则。用 `usetList`，而非 `usetlist` 或 `user_list`;
 
 * 尽量不要使用缩写，例如 `delFile` 应写成 `deleteFile`；
 
@@ -148,6 +158,32 @@ function jumpTOPage() {
 }
 ```
 
+多行导入应该像多行数组和对象文字一样缩进；
+```javascript
+// good
+import {
+  longNameA,
+  longNameB,
+  longNameC,
+  longNameD,
+  longNameE,
+} from 'path'
+
+// bad
+import { longNameA, longNameB, longNameC, longNameD, longNameE } from 'path'
+```
+
+使用 === 和 !== 而非 == 和 !=;
+```javascript
+// good
+if (flag === 'test')
+if (flag !== 'test')
+
+// bad
+if (flag == 'test')
+if (flag != 'test') 
+```
+
 ### 样式
 
 样式书写一般有两种：一种是紧凑格式 (Compact)
@@ -185,6 +221,7 @@ function jumpTOPage() {
 .test{
   width:100%;
 }
+```
 
 逗号分隔的取值，逗号之后一个空格。
 
@@ -210,9 +247,19 @@ function jumpTOPage() {
 .test {
   margin: 0px 10px;
 }
+```
 
 ### 媒体
 
 图片都应该经过压缩处理，压缩后的图片不应该出现肉眼可感知的失真。60 质量的 JPEG 格式图片与质量大于 60 的相比，肉眼已看不出明显的区别，因此保存 JPEG 图的时候，质量一般控制在 60，若保真度要求高的图片可适量提高到 80，图片大小控制在 200KB 以内。
 
+### HTML
+HTML文件必须加上 DOCTYPE 声明，并统一使用 HTML5 的文档声明：
+```html
+<!DOCTYPE html>
+```
 
+页面编码统一使用 `UTF-8`
+```html
+<meta charset="UTF-8">
+```
