@@ -17,9 +17,13 @@ javscript 统一使用 [ES6](https://es6.ruanyifeng.com/) 语法。
 
 * 变量名要有意义，不要使用诸如 `a`,`b`,`c`,`obj`,`arr`这一类命名，正确命名应该是`userList`，`optionsMap` 等；
 
+* 如果是布尔值，则使用 `is`, `can`, `show` 等开头。例如：isManager, canEdit，showTitle 。
+
 * 统一使用驼峰式命名规则。用 `usetList`，而非 `usetlist` 或 `user_list`;
 
 * 尽量不要使用缩写，例如 `delFile` 应写成 `deleteFile`；
+
+* 变量转换时，要使用显示转化，即 `String(str)`, `Number('10')`，不推荐使用 `+num`, `num + ''` 等方式进行类型转换；
 
 * 变量命名不要添加无意义的上下文，假设有一个 Dialog 组件，它的标题应该为 `title`，而不是 `dialogTitle`。
 
@@ -30,12 +34,23 @@ javscript 统一使用 [ES6](https://es6.ruanyifeng.com/) 语法。
   }
 ```
 
+* props 上的属性通常教 onXXX，实例方法叫 handleXXX。
+```javascript
+<CompanyInfo
+  onChange={this.handleChange}
+  onRemove={this.handleRemove}
+>
+```
+
 * 项目中不要出现魔术数字，比如 `setTimeout(func, 86400000)`, 应该将 `86400000` 独立命名，`const MILLISECONDS_IN_A_DAY = 86400000`，主要好处：
 方便搜索；
 根据变量命名理解意义，便于理解代码；
 多处复用，减少书写 bug。
 
 ### 函数
+
+函数命名
+动宾结构为主，如 `saveApplyData`, `fixUserData`, `transferUserData`, `removeFile`。
 
 使用参数默认值方式：
 
@@ -184,6 +199,16 @@ if (flag == 'test')
 if (flag != 'test') 
 ```
 
+多个判断需要换行，并且判断符在开头；多组条件用括号进行区分。
+```javascript
+if (conditionA
+    && conditionB
+    && conditionC)
+
+if ((conditionA || conditionB)
+    && conditaionC) 
+```
+
 ### 样式
 
 样式书写一般有两种：一种是紧凑格式 (Compact)
@@ -285,3 +310,6 @@ HTML文件必须加上 DOCTYPE 声明，并统一使用 HTML5 的文档声明：
 ### Git
 
 提交代码禁止无意义信息，例如“0625”，“bug”，“修复bug”等。代码应多次提交，每次完成一个独立功能提交一次代码，例如“完成客户信息组件开发”，“完成公司信息组件开发”，“修复客户信息显示错误的bug”，“与后端进行客户信息相关的接口联调”等。提交的信息一定要明确表明改动的代码的用途。
+
+使用 cz-conventional-changelog 自动生成符合要求的提交信息。
+使用 husky 来进行提交前的工作确认。
